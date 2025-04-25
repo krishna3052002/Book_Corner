@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1088287429373",
+    "project_id": "book-corner-2f328",
+    "storage_bucket": "book-corner-2f328.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1088287429373:android:6eda3205b3462c20cf2494",
+        "android_client_info": {
+          "package_name": "com.example.quizeme"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDEBXIIXImUAyQPJdLkfJWqVObKZeipTWE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
