@@ -13,7 +13,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class SignupActivity extends AppCompatActivity {
 
-    EditText nameBox, emailBox, passwordBox;  // Removed referBox
+    EditText nameBox, emailBox, passwordBox;
     Button submitBtn, loginBtn;
     FirebaseAuth auth;
 
@@ -22,13 +22,6 @@ public class SignupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         auth = FirebaseAuth.getInstance();
-
-        // 🔐 Auto-redirect if already logged in
-        if (auth.getCurrentUser() != null) {
-            startActivity(new Intent(this, MainActivity.class));
-            finish();
-            return;
-        }
 
         setContentView(R.layout.activity_signup);
 
@@ -51,7 +44,10 @@ public class SignupActivity extends AppCompatActivity {
 
             auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
-                    startActivity(new Intent(SignupActivity.this, MainActivity.class));
+                    Toast.makeText(this, "Signup successful! Please login now.", Toast.LENGTH_SHORT).show();
+                    // Now after signup, move user to LoginActivity
+                    auth.signOut(); // Important! logout after signup so they can login manually
+                    startActivity(new Intent(SignupActivity.this, LoginActivity.class));
                     finish();
                 } else {
                     Toast.makeText(this, "Signup Failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
@@ -59,9 +55,10 @@ public class SignupActivity extends AppCompatActivity {
             });
         });
 
-        // Go to Login
+        // Already have an account? Go to Login
         loginBtn.setOnClickListener(v -> {
             startActivity(new Intent(this, LoginActivity.class));
+            finish();
         });
     }
 }
